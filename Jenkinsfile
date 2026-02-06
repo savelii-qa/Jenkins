@@ -6,11 +6,13 @@ pipeline {
       steps {
         sh '''
           docker run --rm \
-            -v $PWD:/app \
+            -v "$PWD:/app" \
             -w /app \
-            python:3.11-slim python main.py
+            python:3.11-slim \
+            python main.py
         '''
       }
     }
   }
 }
+
