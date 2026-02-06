@@ -1,20 +1,15 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.11-slim'
+        }
+    }
 
     stages {
-        stage('Install Python') {
+        stage('Run Python') {
             steps {
-                sh '''
-                  apt-get update
-                  apt-get install -y python3
-                '''
-            }
-        }
-
-        stage('Run Python script') {
-            steps {
-                sh 'python3 --version'
-                sh 'python3 main.py'
+                sh 'python --version'
+                sh 'python main.py'
             }
         }
     }
