@@ -1,16 +1,16 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.11-slim'
-        }
-    }
+  agent any
 
-    stages {
-        stage('Run Python') {
-            steps {
-                sh 'python --version'
-                sh 'python main.py'
-            }
-        }
+  stages {
+    stage('Run Python in Docker') {
+      steps {
+        sh '''
+          docker run --rm \
+            -v $PWD:/app \
+            -w /app \
+            python:3.11-slim python main.py
+        '''
+      }
     }
+  }
 }
