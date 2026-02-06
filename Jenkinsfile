@@ -1,19 +1,16 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.11-slim'
+        }
+    }
 
     stages {
-        stage('Checkout') {
-            steps {
-                echo 'Code already checked out from SCM'
-            }
-        }
-
         stage('Run Python script') {
             steps {
-                sh 'python3 --version'
-                sh 'python3 main.py'
+                sh 'python --version'
+                sh 'python main.py'
             }
         }
     }
 }
-
