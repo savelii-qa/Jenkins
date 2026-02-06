@@ -2,15 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Run Python in Docker') {
+        stage('Install Python') {
             steps {
                 sh '''
-                  docker run --rm \
-                    -v "$PWD":/app \
-                    -w /app \
-                    python:3.11-slim \
-                    python main.py
+                  apt-get update
+                  apt-get install -y python3
                 '''
+            }
+        }
+
+        stage('Run Python script') {
+            steps {
+                sh 'python3 --version'
+                sh 'python3 main.py'
             }
         }
     }
