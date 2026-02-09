@@ -9,7 +9,7 @@ pipeline {
             -v "$PWD:/app" \
             -w /app \
             python:3.11-slim \
-            python src/main.py
+            python main.py
         '''
       }
     }
